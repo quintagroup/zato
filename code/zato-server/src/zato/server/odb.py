@@ -506,16 +506,21 @@ class ODBManager(SessionWrapper):
                 service = session.query(Service).\
                     filter(Service.impl_name==impl_name).\
                     filter(Service.cluster_id==self.cluster.id).\
-                    one()
-
-                channel = session.query(HTTPSOAP).\
-                    filter(HTTPSOAP.name==channel_name).\
-                    filter(HTTPSOAP.cluster_id==self.cluster.id).\
                     first()
 
-                if not channel:
-                    func = get_http_json_channel if 'json' in channel_name else get_http_soap_channel
-                    session.add(func(channel_name.replace('.json', ''), service, cluster, pubapi_sec))
+                if not service:
+                    logger.warn('Could not find impl_name `%r`', impl_name)
+
+                else:
+
+                    channel = session.query(HTTPSOAP).\
+                        filter(HTTPSOAP.name==channel_name).\
+                        filter(HTTPSOAP.cluster_id==self.cluster.id).\
+                        first()
+    
+                    if not channel:
+                        func = get_http_json_channel if 'json' in channel_name else get_http_soap_channel
+                        session.add(func(channel_name.replace('.json', ''), service, cluster, pubapi_sec))
 
             session.commit()
 
