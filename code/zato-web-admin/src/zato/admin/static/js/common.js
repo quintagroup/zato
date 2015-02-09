@@ -98,7 +98,7 @@ $.namespace('zato.pattern.delivery');
 $.namespace('zato.pattern.delivery.in_doubt');
 $.namespace('zato.plugins');
 $.namespace('zato.plugins.manage');
-$.namespace('zato.plugins.sdk');
+$.namespace('zato.plugins.design');
 $.namespace('zato.pubsub.consumers');
 $.namespace('zato.pubsub.message');
 $.namespace('zato.pubsub.producers');

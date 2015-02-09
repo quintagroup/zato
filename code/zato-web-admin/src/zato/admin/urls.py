@@ -36,6 +36,7 @@ from zato.admin.web.views.outgoing import jms_wmq as out_jms_wmq
 from zato.admin.web.views.outgoing import odoo as out_odoo
 from zato.admin.web.views.outgoing import sql as out_sql
 from zato.admin.web.views.outgoing import zmq as out_zmq
+from zato.admin.web.views.plugins import design as plugins_design
 from zato.admin.web.views.pubsub import topics as pubsub_topics
 from zato.admin.web.views.pubsub import consumers as pubsub_consumers
 from zato.admin.web.views.pubsub import message as pubsub_message
@@ -991,6 +992,17 @@ urlpatterns += patterns('',
     )
 
 # ################################################################################################################################
+
+    # Plug-ins
+
+urlpatterns += patterns('',
+
+    url(r'^zato/plugins/design/impexp/$',
+        login_required(plugins_design.Index()), name='plugins-design'),
+    )
+
+# ################################################################################################################################
+
 
     # Pub/sub
 

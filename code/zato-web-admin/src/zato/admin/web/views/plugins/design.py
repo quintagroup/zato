@@ -16,6 +16,6 @@ from zato.admin.web.views import Index as _Index
 
 class Index(_Index):
     method_allowed = 'GET'
-    url_name = 'plugins-sdk'
-    template = 'plugins/sdk.html'
-    service_name = 'zato.plugins.sdk.get-list'
+    url_name = 'plugins-design'
+    template = 'plugins/design.html'
+    service_name = 'zato.plugins.design.get-list'
