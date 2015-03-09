@@ -26,11 +26,11 @@ mkdir $CURDIR/zato_extra_paths
 symlink_py 'numpy'
 symlink_py 'scipy'
 
-sudo pip-python install distribute==0.6.49
-sudo pip-python install virtualenv==1.9.1
-sudo pip-python install zato-apitest
-
 virtualenv .
+
+bin/pip install distribute==0.6.49
+#bin/pip install zato-apitest
+
 
 $CURDIR/bin/python bootstrap.py -v 1.7.0
 $CURDIR/bin/buildout
