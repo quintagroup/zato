@@ -15,8 +15,7 @@ from traceback import format_exc
 # gevent
 from gevent.lock import RLock
 
-# openerp-client-lib
-import openerplib
+import odoorpc
 
 # Zato
 from zato.common.util import ping_odoo
@@ -47,8 +46,11 @@ class OdooWrapper(object):
 
     def add_client(self):
 
-        conn = openerplib.get_connection(hostname=self.config.host, protocol=self.config.protocol, port=self.config.port,
-            database=self.config.database, login=self.config.user, password=self.config.password)
+        conn = odoorpc.ODOO(self.config.host, protocol=self.config.protocol, port=self.config.port)
+        try:
+            conn.login(self.config.database, self.config.user, self.config.password)
+        except Exception, e:
+            logger.warn('Could not connect to Odoo (%s), e:`%s`', self.config.name, format_exc(e))
 
         try:
             ping_odoo(conn)
